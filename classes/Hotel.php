@@ -11,6 +11,7 @@ Class Hotel{
 
 
 
+
 public function __construct($nom,$adresse,$etage){
 
         $this->nom=$nom;
@@ -81,7 +82,25 @@ public function __construct($nom,$adresse,$etage){
         return "Nombre de Chambres:  $resultat";
     }
 
+    public function afficherNbChambresReserve(){
 
+        $resultat=0;
+        foreach($this->chambres as $chambre){
+            
+            if($chambre->estReserve()){
+                $resultat++;
+            }
+
+        }
+        return "Nombre de chambres réservés: $resultat";
+    }
+
+    public function estChambreReservee(Chambre $chambre): bool {
+        return $chambre->estReserve();
+    }
+
+   
+    
 
 
     public function __toString(){

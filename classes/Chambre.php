@@ -6,12 +6,12 @@ Class Chambre{
     private int $etage;
     private bool $estReserve;
     private int $prix;
-    private $wifi;
+    private string $wifi;
     private Hotel $hotel;
     private array $reservations;
 
 
-    public function __construct(Hotel $hotel,int $numero,int $etage,bool $estReserve,int $prix,$wifi,){
+    public function __construct(Hotel $hotel,int $numero,int $etage,bool $estReserve,int $prix,string $wifi,){
         $this->hotel=$hotel;
         $this->numero=$numero;
         $this->etage=$etage;
@@ -22,22 +22,12 @@ Class Chambre{
         $this->reservations=[];
     
     }
-    
-    public function reserver(){
-      $this->estReserve=true;
-        
-    }
-    public function estReserve(){
 
-        if ($this->estReserve=true){
-            return "Reservé";
-           }else{
-            return "Disponible";
-           };
-    }
-    public function getEstReserve()
-    {
-        return $this->estReserve;
+    
+    
+    public function estReserve(): bool {
+    return  $this->estReserve;
+    
     }
 
    

@@ -10,8 +10,9 @@ Class Reservation{
     
 
 
-    public function __construct(Client $client,string $dateArrive,string $dateDepart){
+    public function __construct(Client $client,Chambre $chambre,string $dateArrive,string $dateDepart){
         $this->client=$client;
+        $this->chambre=$chambre;
         $this->dateArrive= new datetime ($dateArrive);
         $this->dateDepart= new datetime ($dateDepart);
         $this->client->addReservationClient($this);
@@ -76,9 +77,9 @@ Class Reservation{
 
     public function __toString(){
 
-        return  "Nom: ".$this->getClient().
-                "Dates: ". $this->getDateArrive(). " - ". $this->getDateDepart();
-                "Chambre: ".$this->getNumeroChambre();
+        return  "Nom: ".$this->getClient().'<br>'.
+                "Dates: ". $this->getDateArrive(). " - ". $this->getDateDepart().'<br>'.
+                "Chambre: ".$this->getNumeroChambre().'<br>';
                
     }
 
