@@ -4,22 +4,49 @@ Class Chambre{
 
     private int $numero;
     private int $etage;
-    private string $statut;
+    private bool $estReserve;
     private int $prix;
     private $wifi;
     private Hotel $hotel;
+    private array $reservations;
 
-    public function __construct(Hotel $hotel,int $numero,int $etage,string $statut,int $prix,$wifi){
 
+    public function __construct(Hotel $hotel,int $numero,int $etage,bool $estReserve,int $prix,$wifi,){
         $this->hotel=$hotel;
         $this->numero=$numero;
         $this->etage=$etage;
-        $this->statut=$statut;
+        $this->estReserve=$estReserve;
         $this->prix=$prix;
         $this->wifi=$wifi;
-        
+        $this->hotel->addChambre($this);
+        $this->reservations=[];
+    
     }
     
+    public function reserver(){
+      $this->estReserve=true;
+        
+    }
+    public function estReserve(){
+
+        if ($this->estReserve=true){
+            return "Reservé";
+           }else{
+            return "Disponible";
+           };
+    }
+    public function getEstReserve()
+    {
+        return $this->estReserve;
+    }
+
+   
+    public function setEstReserve($estReserve)
+    {
+        $this->estReserve = $estReserve;
+
+        return $this;
+    }
 
     public function getHotel()
     {
@@ -61,18 +88,6 @@ Class Chambre{
         return $this;
     }
 
-    public function getStatut()
-    {
-        return $this->statut;
-    }
-
- 
-    public function setStatut($statut)
-    {
-        $this->statut = $statut;
-
-        return $this;
-    }
 
     public function getEtage()
     {
@@ -99,12 +114,28 @@ Class Chambre{
         return $this;
     }
 
-    public function getInfo(){
-        return  $this->getHotel()."Numero de Chambre: ". $this->getNumero() . " Etage: ".$this->getEtage()." Statut: ".$this->getStatut(). " Le prix ".$this->getPrix()." Wifi ".$this->getWifi(); 
+    public function addReservationChambre(Chambre $numero){
+
+        $this->reservations[]=$numero;
     }
+
+    public function afficherReservationChambre(){
+
+        $resultat="";
+        foreach($this->reservations as $reservation){
+            $resultat.=$reservation;
+            return $resultat;
+        }
+    }
+    
+
+    public function getInfo(){
+        return  $this->getHotel()."Numero de Chambre: ". $this->getNumero() . " Etage: ".$this->getEtage()." Statut: ".$this->estReserve();
 
     
 }
 
+   
+}   
 
 ?>

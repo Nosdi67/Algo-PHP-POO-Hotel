@@ -7,30 +7,55 @@ Class Reservation{
     private DateTime $dateDepart;
     private Client $client;
     private Chambre $chambre;
+    
 
 
-    public function __construct(DateTime $dateArrive,DateTime $dateDepart){
-
-        $this->dateArrive=$dateArrive;
-        $this->dateDepart=$dateDepart;
+    public function __construct(Client $client,string $dateArrive,string $dateDepart){
         $this->client=$client;
-        $this->chambre=$chambre;
+        $this->dateArrive= new datetime ($dateArrive);
+        $this->dateDepart= new datetime ($dateDepart);
+        $this->client->addReservationClient($this);
+       
+        
+    }
+    public function getNumeroChambre(){
+        
+        return $this->chambre->getNumero();
+    }
+
+    public function getDateDepart()
+    {
+        return $this->dateDepart->format('d-m-Y');
     }
 
     
-    public function getChambre()
+    public function setDateDepart($dateDepart)
     {
-        return $this->chambre;
-    }
-
-    
-    public function setChambre($chambre)
-    {
-        $this->chambre = $chambre;
+        $this->dateDepart = $dateDepart;
 
         return $this;
     }
 
+  
+    public function getDateArrive()
+    {
+        return $this->dateArrive->format('d-m-Y');
+    }
+
+  
+    public function setDateArrive($dateArrive)
+    {
+        $this->dateArrive = $dateArrive;
+
+        return $this;
+    }
+
+    public function setChambre($chambre)
+    {
+        $this->chambre->setNumero($chambre);
+
+        return $this;
+    }
 
     public function getClient()
     {
@@ -45,36 +70,23 @@ Class Reservation{
         return $this;
     }
 
-    public function getDateDepart()
-    {
-        return $this->dateDepart;
+    
+    
+    
+
+    public function __toString(){
+
+        return  "Nom: ".$this->getClient().
+                "Dates: ". $this->getDateArrive(). " - ". $this->getDateDepart();
+                "Chambre: ".$this->getNumeroChambre();
+               
     }
+
+
 
     
-    public function setDateDepart($dateDepart)
-    {
-        $this->dateDepart = $dateDepart;
-
-        return $this;
-    }
-
-  
-    public function getDateArrive()
-    {
-        return $this->dateArrive;
-    }
-
-  
-    public function setDateArrive($dateArrive)
-    {
-        $this->dateArrive = $dateArrive;
-
-        return $this;
-    }
-
-
-
 }
+
 
 
 ?>

@@ -5,13 +5,14 @@ class Client{
     private string $nom;
     private string $prenom;
     private DateTime $dateDeNaissance;
+    private array $reservations;
 
 
-    public function __construct(string $nom,string $prenom,DateTime $dateDeNaissance){
-
+    public function __construct(string $nom,string $prenom,string $dateDeNaissance){
         $this->nom=$nom;
         $this->prenom=$prenom;
-        $this->dateDeNaissance=$dateDeNaissance;
+        $this->dateDeNaissance=new datetime($dateDeNaissance);
+        $this->reservations=[];
     }
 
 
@@ -45,7 +46,7 @@ class Client{
     
     public function getDateDeNaissance()
     {
-        return $this->dateDeNaissance;
+        return $this->dateDeNaissance->format('d-m-Y');
     }
 
 
@@ -55,8 +56,13 @@ class Client{
 
         return $this;
     }
+    public function addReservationClient(Reservation $reservation){
 
-    public function __tostring(){
+        $this->reservations[]=$reservation;
+    }
+
+
+    public function __toString(){
 
         return $this->getnom(). " ". $this->getPrenom();
     }

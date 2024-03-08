@@ -75,12 +75,16 @@ public function __construct($nom,$adresse,$etage){
         }
     }
 
+    public function afficherNbChambres(){
+
+        $resultat=count($this->chambres);
+        return "Nombre de Chambres:  $resultat";
+    }
 
 
 
 
-
-    public function __tostring(){
+    public function __toString(){
 
         return $this->getNom();
     }
