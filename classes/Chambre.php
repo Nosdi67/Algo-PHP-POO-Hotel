@@ -25,7 +25,7 @@ Class Chambre{
 
     
     
-    public function estReserve(){
+    public function estReserve(){ 
         if($this->estReserve==true){
             return " Disponible";
 
@@ -111,17 +111,12 @@ Class Chambre{
 
     
 
+    public function addReservationChambre(Reservation $numero){ //AJOUTER LE NUMERO DES CHAMBRES RESERVE DANS LE TABLEAU DE RESERVATION 
 
-
-
-
-
-    public function addReservationChambre(Reservation $numero){
-
-        $this->reservations[]=$numero;
+        $this->reservations[]=$numero; 
     }
 
-    public function afficherReservationChambre(){
+    public function afficherReservationChambre(){ //AFFICHER LES RESERVATION DANS LE TABLEAU DES RESA
 
         $resultat="";
         foreach($this->reservations as $reservation){

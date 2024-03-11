@@ -73,7 +73,7 @@ Class Reservation{
         return $this;
     }
    
-    public function getPrixTotalResa(){
+    public function getTotalResa(){  //GET LE PRIX TOTAL D'UNE SEUL RESA SELON NB DE JOURS
 
         $calculejours=$this->dateArrive->diff($this->dateDepart);
         $nbjours = $calculejours->d;
@@ -82,6 +82,7 @@ Class Reservation{
         return $total;
 
     }
+   
 
     public function __toString(){
 
@@ -89,7 +90,7 @@ Class Reservation{
                 "Dates du séjour: ". $this->getDateArrive(). " - ". $this->getDateDepart().'<br>'.
                 "Chambre: ".$this->getNumeroChambre().'<br>'.
                 "Prix de la Chambre :".$this->chambre->getPrix()." €".'<br>'.
-                "Total: ".      '<br>';
+                "Total: ".$this->getTotalResa().'€'.'<br>';
 
                
     }

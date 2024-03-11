@@ -62,18 +62,30 @@ class Client{
 
     public function addReservationClient(Reservation $reservation){
 
-        $this->reservations[]=$reservation;
+        $this->reservations[]=$reservation; // AJOUTER LES RESA DANS LE TABLEAU
     }
 
-    public function getreservationClinet(){
+    public function getreservationClinet(){ //AFFICHER LES RESA DU TABLEAU
 
         $resultat="";
         foreach($this->reservations as $reservation){
-            $resultat.=$reservation;
+            $resultat.=$reservation."\n";
         }
-            return '<h1>'."Reservations de $this".'</h1>'. '<br>'.
-                    $resultat.'<br>';
+            return '<h1>'."Reservations de $this".'</h1>'. '<br>'. //AFFICHER TOUTES LES RESA DU CLIENT EN QUESTION
+                    $resultat."\n" .$this->getTotalGlobal();  // AFFICHER LE TOTAL DE TOUTES SES RESA
     }
+
+    
+    public function getTotalGlobal(){  // CALCULER LE PRIX GLOBAL DE SES RESERVATIONS
+     
+       $total = 0;
+       foreach ($this->reservations as $reservation) {
+        $total+=$reservation->getTotalResa(); //CALCULE LE TOTAL SELON LE NB DE JOURS RESERVEE
+       }
+       return "Total: ".$total. "€".'<br>';
+    }
+    
+        
 
 
     public function __toString(){
