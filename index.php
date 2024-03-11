@@ -7,22 +7,30 @@ spl_autoload_register(function ($class_name) {
 });
 
 $hilton= new Hotel("Hilton **** Strasbourg "," 1O Route de la Gare 67000 STRASBOURG",5 );
+$regent=new Hotel("Regent **** Paris","adresse",5);
 $chambre1=new Chambre($hilton,101,1,"Disponible",60,"oui");
 $chambre2=new Chambre($hilton,102,1,"Disponible",60,"oui");
 $chambre3=new Chambre($hilton,103,1,"Disponible",60,"oui");
 $chambre4=new Chambre($hilton,104,1,"Disponible",60,"oui");
 
-$client1=new Client(" Robert "," SHAKHMURADYAN " ,"2001/03/22");
-$reservation1= new Reservation($client1,$chambre1,"08/03/2024","09/03/2024");
+$client1=new Client(" Robert "," SHAKHMURADYAN " ,"2001-03-22");
+$client2=new Client("MURMANN","Micka","1980-01-01");
+$reservation1= new Reservation($client1,$chambre1,"2024-03-08","2024-03-10");
+$reservation2=new Reservation($client1,$chambre3,"2024-03-08","2024-03-09");
+$reservation3=new Reservation($client2,$chambre2,"2024-03-11","2024-03-12");
 
 
+echo $hilton->getInfo().'<br>';
 
-echo $hilton->getnom().'<br>';
-echo $chambre1->getInfo().'<br>';
-echo $hilton->afficherNbChambres().'<br>';
-echo $reservation1.'<br>';
-echo $hilton->afficherNbChambresReserve();
-echo $hilton->estChambreReservee($chambre1);
+echo $hilton->getReservations().'<br>';
+
+echo $regent->getReservations().'<br>';
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo $client1->getreservationClinet().'<br>';
+
+echo $reservation1->getPrixTotalResa();
 
  
 

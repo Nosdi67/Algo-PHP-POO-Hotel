@@ -13,10 +13,12 @@ Class Reservation{
     public function __construct(Client $client,Chambre $chambre,string $dateArrive,string $dateDepart){
         $this->client=$client;
         $this->chambre=$chambre;
-        $this->dateArrive= new datetime ($dateArrive);
-        $this->dateDepart= new datetime ($dateDepart);
+        $this->dateArrive= new Datetime ($dateArrive);
+        $this->dateDepart= new Datetime ($dateDepart);
         $this->client->addReservationClient($this);
-       
+        $this->chambre->addReservationChambre($this);
+        $this->chambre->setEstReserve(false);
+        $this->chambre->getHotel()->addReservations($this);
         
     }
     public function getNumeroChambre(){
@@ -70,23 +72,32 @@ Class Reservation{
 
         return $this;
     }
+   
+    public function getPrixTotalResa(){
 
-    
-    
-    
+        $calculejours=$this->dateArrive->diff($this->dateDepart);
+        $nbjours = $calculejours->d;
+        $prix=$this->chambre->getPrix();
+        $total=$prix*$nbjours;
+        return $total;
+
+    }
 
     public function __toString(){
 
         return  "Nom: ".$this->getClient().'<br>'.
-                "Dates: ". $this->getDateArrive(). " - ". $this->getDateDepart().'<br>'.
-                "Chambre: ".$this->getNumeroChambre().'<br>';
+                "Dates du séjour: ". $this->getDateArrive(). " - ". $this->getDateDepart().'<br>'.
+                "Chambre: ".$this->getNumeroChambre().'<br>'.
+                "Prix de la Chambre :".$this->chambre->getPrix()." €".'<br>'.
+                "Total: ".      '<br>';
+
                
     }
-
-
-
-    
 }
+
+
+
+
 
 
 

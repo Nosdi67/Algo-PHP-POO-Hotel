@@ -11,7 +11,7 @@ class Client{
     public function __construct(string $nom,string $prenom,string $dateDeNaissance){
         $this->nom=$nom;
         $this->prenom=$prenom;
-        $this->dateDeNaissance=new datetime($dateDeNaissance);
+        $this->dateDeNaissance=new Datetime($dateDeNaissance);
         $this->reservations=[];
     }
 
@@ -56,9 +56,23 @@ class Client{
 
         return $this;
     }
+
+
+
+
     public function addReservationClient(Reservation $reservation){
 
         $this->reservations[]=$reservation;
+    }
+
+    public function getreservationClinet(){
+
+        $resultat="";
+        foreach($this->reservations as $reservation){
+            $resultat.=$reservation;
+        }
+            return '<h1>'."Reservations de $this".'</h1>'. '<br>'.
+                    $resultat.'<br>';
     }
 
 

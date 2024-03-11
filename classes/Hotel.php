@@ -8,6 +8,7 @@ Class Hotel{
     private string $adresse;
     private int $etage;
     private array $chambres;
+    private array $reservations;
 
 
 
@@ -18,6 +19,7 @@ public function __construct($nom,$adresse,$etage){
         $this->adresse=$adresse;
         $this->etage=$etage;
         $this->chambres=[];
+        $this->reservations=[];
     }
 
 
@@ -59,6 +61,16 @@ public function __construct($nom,$adresse,$etage){
         return $this;
     }
 
+    public function getInfo(){
+
+        return '<h1>'. $this->getNom().'</h1>'.'<br>'.
+                 $this->getAdresse(). '<br>'.
+                 $this->afficherNbChambres().'<br>'.
+                 $this->afficherNbChambresReserve().'<br>'.
+                "Nombre de chambres dispo: ".$this->afficherNbChambresDispo();
+
+    }
+
 
     public function addChambre(Chambre $chambre){
 
@@ -66,6 +78,29 @@ public function __construct($nom,$adresse,$etage){
 
     }
 
+    public function addReservations(Reservation $reservation){
+
+        $this->reservations[]=$reservation;
+    }
+    
+    
+    public function afficherReservationHotel(){
+
+        $resultat="";
+        
+        foreach($this->reservations as $reservation){
+            $resultat.=$reservation;
+            
+        }
+        if(empty($this->reservations)){
+            return "Aucune reservation! ";
+        }else{
+            return $resultat;
+        }
+        
+    }
+
+    
     public function afficherChambres(){
 
         $resulat="";
@@ -84,25 +119,27 @@ public function __construct($nom,$adresse,$etage){
 
     public function afficherNbChambresReserve(){
 
-        $resultat=0;
-        foreach($this->chambres as $chambre){
-            
-            if($chambre->estReserve()){
-                $resultat++;
-            }
+        $resultat=count($this->reservations);
+        return "Nombre de chambres réservés: $resultat";
 
         }
-        return "Nombre de chambres réservés: $resultat";
-    }
+    
+    public function afficherNbChambresDispo(){
 
-    public function estChambreReservee(Chambre $chambre): bool {
-        return $chambre->estReserve();
+        $resultat=count($this->chambres)-count($this->reservations);
+        return $resultat;
     }
+     
+    
+    public function getReservations(){
 
+        return'<h1>'."Réservations de l'hotel $this".'</h1>'.'<br>'.
+                $this->afficherReservationHotel();        
+
+    }
+    
    
     
-
-
     public function __toString(){
 
         return $this->getNom();

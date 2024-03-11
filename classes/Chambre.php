@@ -5,13 +5,13 @@ Class Chambre{
     private int $numero;
     private int $etage;
     private bool $estReserve;
-    private int $prix;
+    private float $prix;
     private string $wifi;
     private Hotel $hotel;
     private array $reservations;
 
 
-    public function __construct(Hotel $hotel,int $numero,int $etage,bool $estReserve,int $prix,string $wifi,){
+    public function __construct(Hotel $hotel,int $numero,int $etage,bool $estReserve,float $prix,string $wifi){
         $this->hotel=$hotel;
         $this->numero=$numero;
         $this->etage=$etage;
@@ -25,10 +25,15 @@ Class Chambre{
 
     
     
-    public function estReserve(): bool {
-    return  $this->estReserve;
+    public function estReserve(){
+        if($this->estReserve==true){
+            return " Disponible";
+
+        }elseif($this->estReserve==false){
+            return " Réservée";
+        }
     
-    }
+    }  
 
    
     public function setEstReserve($estReserve)
@@ -104,7 +109,14 @@ Class Chambre{
         return $this;
     }
 
-    public function addReservationChambre(Chambre $numero){
+    
+
+
+
+
+
+
+    public function addReservationChambre(Reservation $numero){
 
         $this->reservations[]=$numero;
     }
