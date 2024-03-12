@@ -17,7 +17,7 @@ Class Reservation{
         $this->dateDepart= new Datetime ($dateDepart);
         $this->client->addReservationClient($this);
         $this->chambre->addReservationChambre($this);
-        $this->chambre->setEstReserve(false);
+        $this->chambre->setetat(false);
         $this->chambre->getHotel()->addReservations($this);
         
     }
